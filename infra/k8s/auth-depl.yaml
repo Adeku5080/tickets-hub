@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth-service
-          image: adeku/auth-th
+          image: adeku/auth-service
 ---
 apiVersion: v1
 kind: Service
@@ -23,6 +23,7 @@ metadata:
 spec:
   selector:
     app: auth-service
+  type: LoadBalancer
   ports:
     - name: auth-srv
       protocol: TCP
