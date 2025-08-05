@@ -16,7 +16,7 @@ spec:
         - name: auth-service
           image: adeku/auth-service
           ports:
-            - containerPort: 3000``
+            - containerPort: 3000
 ---
 apiVersion: v1
 kind: Service
@@ -25,9 +25,9 @@ metadata:
 spec:
   selector:
     app: auth-service
-  type: LoadBalancer
+  type: NodePort
   ports:
     - name: auth-srv
       protocol: TCP
-      port: 3000
+      port: 5000
       targetPort: 3000
