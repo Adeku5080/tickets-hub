@@ -1,6 +1,17 @@
 import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { TokenPurpose } from "src/enums/auth.enum";
+import { ContextLogger } from "src/config/logger/context.logger";
+
+interface JwtPayload {
+  [key: string]: any;
+  purpose?: TokenPurpose;
+}
+
+interface PurposeSettings {
+  secret: string;
+  expiresIn: string;
+}
 
 @Injectable()
 export class TokenService{
@@ -9,7 +20,7 @@ export class TokenService{
   constructor(private readonly jwtService: JwtService) {}
 
   private readonly purposeSettings: Record<TokenPurpose, PurposeSettings> = {
-    [TokenPurpose.AUTH]: {
+    [TokenPurpose.Auth]: {
       secret: process.env.JWT_SECRET,
       expiresIn: '1h',
     },
@@ -17,7 +28,7 @@ export class TokenService{
       secret: process.env.RESET_PASSWORD_JWT_SECRET,
       expiresIn: '10m',
     },
-    [TokenPurpose.REFRESH]: {
+    [TokenPurpose.Refresh]: {
       secret: process.env.JWT_REFRESH_SECRET,
       expiresIn: '7d',
     },
