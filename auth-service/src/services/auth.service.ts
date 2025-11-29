@@ -14,7 +14,7 @@ import { loginUserDto } from 'src/dtos/login-user.dto';
 import { User } from 'src/entities/user.entity';
 
 @Injectable()
-export class UserService {
+export class AuthService {
   constructor(private userRepository: UserRepository) {}
 
   async signup(createUserDto: CreateUserDto): Promise<UserResponseInterface> {
